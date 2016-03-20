@@ -51,7 +51,7 @@ double s_N (double x, int N, int F0, int F1)
 	double sum = F0;
 	int F_n = F1, F_n_prev = F0, F_n_next;
 
-	for (int i = 0; i <= N; ++i)
+	for (int i = 1; i <= N; ++i)
 	{
 		sum += F_n * pow(x,i);
 
