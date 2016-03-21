@@ -108,15 +108,12 @@ int main()
 	double x[] = {-3,-1,0,2,3 };
 
 	polynomial p(0,1);
-	cout << p[0] << "  "<< p[1] << "  " << p[2]<<  endl;
 	for (int i = 0; i < 4; ++i)
 	{
 	 	polynomial k(1);
 	 	k[0] = -x[i]/(x[4] - x[i]);
 	 	k[1] = 1/(x[4]-x[i]);
-	 	cout <<k[0] << "  " << k[1] <<endl;
 	 	p = p * k;
-	 	cout << p[0] << "  "<< p[1] << "  " << p[2]<<  endl;
 	}
 
 
