@@ -115,6 +115,24 @@ void print (const vector< vector<double> > & A)
 
 int main()
 {
+	vector<double> b1, b2;
+	b1.push_back(1); b1.push_back(2); b1.push_back(0);
+	b2.push_back(2); b2.push_back(2); b2.push_back(0);
+
+
+	vector < vector<double> > B;
+	B.push_back(b1); B.push_back(b2); 
+	print(gram_Schmidt(B));
+
+	vector<double> c1, c2;
+	c1.push_back(2); c1.push_back(0); 
+	c2.push_back(2); c2.push_back(2); 
+
+	vector < vector<double> > C;
+	C.push_back(c1); C.push_back(c2);
+	print(gram_Schmidt(C));
+
+
 
 	vector<double> a1, a2, a3;
 	a1.push_back(2);a1.push_back(14);
@@ -126,6 +144,8 @@ int main()
 
 
 	print(gram_Schmidt(A));
+
+
 
 
 }
