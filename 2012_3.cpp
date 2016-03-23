@@ -2,8 +2,13 @@
 #include <vector>
 #include <cmath>
 #include <complex>
-
+#include "fraction.h"
 using namespace std;
+
+fraction pow(const fraction & f, int n){
+
+	return fraction(pow(f.getN(),n), pow(f.getD(),n));
+}
 
 template <typename T>
 class Laurent_polynomial{
@@ -14,8 +19,12 @@ public:
 		coef = vector<T>(nn * 2 + 1, a);
 	}
 	int getN(){return n;}
-	const T & operator[](int i) const{ return coef[i];}
-	T & operator[](int i) {return coef[i];}
+	const T & operator[](int i) const{ 
+		return coef[i+n];
+	}
+	T & operator[](int i) { 
+		return coef[i + n]; 
+	}
 
 	Laurent_polynomial<T> operator+(const Laurent_polynomial<T> & p) const{
 		Laurent_polynomial<T> res;
@@ -30,7 +39,7 @@ public:
 		}
 
 
-		for (int i = 0; i <= st->n *2; ++i)
+		for (int i = -st->n; i <= st->n; ++i)
 		{
 			res[i] = res[i] + (*st)[i]; 
 		}
@@ -39,12 +48,12 @@ public:
 	}
 
 	T value(T x) const{
-		T sum = coef[0];
+		T sum = T(0);
 		
-		for (int i = 1; i <= n; ++i)
+		for (int i = -n; i <= n; ++i)
 		{
-			sum = sum + coef[i] * pow(x, -i);
-			sum = sum + coef[i+n] * pow(x, i);
+			sum = sum + (*this)[i] * pow(x, i);
+			
 		}
 
 		return sum;
@@ -53,15 +62,17 @@ public:
 };
 
 int main(){
-	Laurent_polynomial<double> p(3, 2.0);
+	/*Laurent_polynomial<double> p(3, 2.0);
 	Laurent_polynomial<double> q(5, -1.5), s;
 	double x(2.1), y(-1.25);
 	cout << "p(y) = " << p.value(y) << endl;
 	s = p + q;
 	// N = 2, a_n = 1.0, n = -N,...,N.
 	// value of polynomial p at y
-	     for (int i = -s.getN(); i <= s.getN(); i++)
-	       cout << "s[" << i << "] = " << s[i] << endl; // print coefficients a_n of s
+	for (int i = -s.getN(); i <= s.getN(); i++){
+		cout << "s[" << i << "] = " << s[i] << endl; // print coefficients a_n of s
+	}
+		
 	cout << "s(x) = " << s.value(x) << endl;
 
 
@@ -73,8 +84,18 @@ int main(){
      t = u + v;
      for (int i = -t.getN(); i <= t.getN(); i++)
        cout << "t[" << i << "] = " << t[i] << endl;
-     cout << "t(z) = " << t.value(z) << endl;
+     cout << "t(z) = " << t.value(z) << endl;*/
+	 
 
 
+	 fraction f(1, 45), g(1, 54);
+	 Laurent_polynomial<fraction> p(2, f);
+	 Laurent_polynomial<fraction> q(5, g), s;
+	 s = p + q;
+	 for (int i = -s.getN(); i <= s.getN(); i++)
+		 cout << "s[" << i << "] = " << s[i] << endl;
+	 fraction x(1, 2);
+	 cout << "s(x) = " << s.value(x) << endl;
+	 return 0;
 
 }

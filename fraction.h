@@ -7,7 +7,15 @@ private:
 	void reduce();
 	int gcd(int a, int b);
 public:
-	fraction(int n = 0, int d = 1) : numerator(n), denominator(d) { reduce(); }
+	fraction(int n = 0, int d = 1) : numerator(n), denominator(d) {
+		if (d == 0)
+		{
+			denominator = 1;
+		} 
+		reduce();
+	}
+	int getN() const { return numerator; }
+	int getD() const { return denominator; }
 	fraction operator+ (const fraction &f) const;
 	fraction &operator+= (const fraction &f);
 	fraction operator- (const fraction &f) const;

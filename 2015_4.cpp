@@ -13,11 +13,11 @@ public:
 	primefield(unsigned int v);
 
 	unsigned int getv()const;
-	primefield<p> operator/(const primefield<p> & a) const;
-	primefield<p> operator+(const primefield<p> & a) const;
-	primefield<p> operator-(const primefield<p> & a) const;
-	primefield<p> operator*(const primefield<p> & a) const;
-	primefield<p>& operator+=(const primefield<p> & a);
+	primefield operator/(const primefield<p> & a) const;
+	primefield operator+(const primefield<p> & a) const;
+	primefield operator-(const primefield<p> & a) const;
+	primefield operator*(const primefield<p> & a) const;
+	primefield& operator+=(const primefield<p> & a);
 
 	friend ostream& operator<<(ostream & os, const primefield<p> & a){
 		os <<a.v;
